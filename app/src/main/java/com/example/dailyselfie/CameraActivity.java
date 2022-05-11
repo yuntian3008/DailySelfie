@@ -19,6 +19,10 @@ import androidx.work.WorkManager;
 import androidx.work.Worker;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.Image;
 import android.os.Bundle;
@@ -27,6 +31,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.dailyselfie.databinding.ActivityCameraBinding;
+import com.example.dailyselfie.service.AlarmReceiver;
 import com.example.dailyselfie.service.RemindWorker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -207,7 +212,7 @@ public class CameraActivity extends AppCompatActivity {
                                         try {
                                             outputStream = new FileOutputStream(file);
                                             outputStream.write(bytes);
-                                            remindAfterHour(1);
+
                                             finish();
                                         } catch (IOException e) {
                                             e.printStackTrace();
@@ -273,13 +278,7 @@ public class CameraActivity extends AppCompatActivity {
         });
     }
 
-    private void remindAfterHour(int hour) {
-        WorkManager.getInstance(this).cancelAllWork();
-        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(RemindWorker.class,hour, TimeUnit.HOURS)
-                .setInitialDelay(hour, TimeUnit.HOURS)
-                .build();
-        WorkManager.getInstance(this).enqueue(periodicWorkRequest);
-    }
+
 
     private boolean allPermissionsGranted(){
 

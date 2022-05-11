@@ -2,4 +2,5 @@
     <string name="app_name">DailySelfie</string>
     <string name="camera">camera</string>
     <string name="take_a_photo">Take a photo</string>
+    <string name="choose_time_for_notification">Choose time for notification</string>
 </resources>
