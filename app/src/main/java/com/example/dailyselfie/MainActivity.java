@@ -115,8 +115,9 @@ public class MainActivity extends AppCompatActivity implements GalleryAdapter.It
             }
             if (item.getItemId() == R.id.clock) {
                 MaterialTimePicker materialTimePicker = new MaterialTimePicker.Builder()
-                        .setTimeFormat(TimeFormat.CLOCK_24H)
+                        .setTimeFormat(TimeFormat.CLOCK_12H)
                         .setHour(prefs.getInt("hour",9))
+                        .setMinute(prefs.getInt("minute",0))
                         .setTitleText("Chọn thời gian thông báo mỗi ngày")
                         .build();
                 materialTimePicker.addOnPositiveButtonClickListener(new View.OnClickListener() {
